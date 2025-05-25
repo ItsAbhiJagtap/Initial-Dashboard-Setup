@@ -1,0 +1,34 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+}
+
+.middle-section {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.middle-section > * {
+  flex: 1;
+  min-width: 300px;
+}
+
+.bottom-section {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.bottom-section > * {
+  flex: 1;
+  min-width: 320px;
+}
+
+.status-activity-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

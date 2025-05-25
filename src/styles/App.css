@@ -1,0 +1,228 @@
+/* App.css */
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4f7fc;
+  height: 100%;
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 220px;
+  background-color: white;
+  padding: 24px 16px;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.logo .primary {
+  color: #5a57ff;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  color: #333;
+}
+
+.icon-placeholder {
+  width: 18px;
+  height: 18px;
+  background: #ccc;
+  border-radius: 4px;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: 16px 24px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  background: #f0f0f5;
+  border-radius: 8px;
+  padding: 6px 10px;
+  gap: 8px;
+}
+
+.search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.icon {
+  color: #555;
+}
+
+.violet-icon {
+  color: #5a57ff;
+}
+
+.user-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #ddd;
+}
+
+.dashboard-main {
+  display: flex;
+  padding: 24px;
+  gap: 24px;
+}
+
+.dashboard-left, .dashboard-right {
+  flex: 1;
+  background-color: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.anatomy-card {
+  position: relative;
+  background: #f0f2fa;
+  height: 260px;
+  border-radius: 12px;
+}
+
+.anatomy-image {
+  width: 100%;
+  height: 100%;
+  background: #ddd;
+  border-radius: 12px;
+}
+
+.status-tags {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.status-tag {
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.status-tag.red { background: #f44336; }
+.status-tag.blue { background: #2196f3; }
+
+.activity-section {
+  background: #fafbff;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.05);
+}
+
+.activity-graph {
+  height: 100px;
+  background: linear-gradient(to top, #5a57ff 60%, #ddd 60%);
+  margin: 10px 0;
+  border-radius: 8px;
+}
+
+.calendar-section {
+  background: #f0f2fa;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.calendar-header {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.calendar-grid {
+  height: 180px;
+  background: white;
+  border-radius: 8px;
+}
+
+.appointments-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.appointment-card {
+  background: #fff;
+  border-left: 4px solid #5a57ff;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.appointment-card.light {
+  border-left-color: #2196f3;
+}
+
+.schedule-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.schedule-card {
+  flex: 1;
+  background: #f4f7fc;
+  padding: 12px;
+  border-radius: 8px;
+  min-width: 120px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
