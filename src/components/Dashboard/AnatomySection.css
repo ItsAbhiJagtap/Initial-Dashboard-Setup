@@ -50,10 +50,38 @@
   left: 57%;
 }
 
+.health-indicator.qr-scan {
+  background: #3f5ed0;
+  top: 45%;
+  left: 52%;
+}
+
 .health-indicator.leg {
   background: #0ea5e9;
   bottom: 23%;
   right: 57%;
+}
+
+.health-indicator.qr-scan-icon-only {
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+}
+
+.health-indicator.qr-scan-icon-only:hover {
+  transform: scale(1.15);
+  box-shadow: none;
+}
+
+.health-indicator.qr-scan-icon-only .qr-scan-icon {
+  width: 24px;
+  height: 24px;
+  filter: invert(45%) sepia(27%) saturate(1966%) hue-rotate(217deg) brightness(95%) contrast(95%); /* Light violet color */
+  transition: all 0.2s ease;
+}
+
+.health-indicator.qr-scan-icon-only:hover .qr-scan-icon {
+  filter: invert(35%) sepia(27%) saturate(1966%) hue-rotate(217deg) brightness(95%) contrast(95%); /* Darker violet on hover */
 }
 
 .indicator-icon {
@@ -93,6 +121,13 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+.qr-scan-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* Makes the icon white */
+}
+
 /* Responsive Styles */
 @media (max-width: 992px) {
   .anatomy-section {
@@ -125,6 +160,16 @@
     width: 32px;
     height: 32px;
   }
+
+  .qr-scan-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .health-indicator.qr-scan-icon-only .qr-scan-icon {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -146,10 +191,35 @@
     right: 55%;
   }
 
+  .health-indicator.qr-scan-icon-only:first-of-type {
+    top: 15%;
+    left: 49%;
+  }
+  
+  .health-indicator.qr-scan-icon-only:last-of-type {
+    bottom: 20%;
+    right: 49%;
+  }
+
   .zoom-icon {
     width: 28px;
     height: 28px;
     top: 12px;
     right: 12px;
+  }
+
+  .qr-scan-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .health-indicator.qr-scan {
+    top: 42%;
+    left: 50%;
+  }
+
+  .health-indicator.qr-scan-icon-only .qr-scan-icon {
+    width: 18px;
+    height: 18px;
   }
 }

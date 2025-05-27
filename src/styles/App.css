@@ -34,6 +34,7 @@ html::-webkit-scrollbar,
   box-sizing: border-box;
   position: relative;
   overflow-x: hidden;
+  z-index: 1;
 }
 
 /* Sidebar container */
@@ -45,8 +46,12 @@ html::-webkit-scrollbar,
   margin: 16px 0 16px 16px;
   position: sticky;
   top: 16px;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+  transition: transform 0.3s ease;
+  z-index: 999;
+}
+
+.sidebar-container.open {
+  transform: translateX(0);
 }
 
 /* Main dashboard area */
@@ -73,16 +78,18 @@ html::-webkit-scrollbar,
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 16px;
   background: #819db900;
   padding: 12px 16px;
   border-radius: 16px;
   flex-shrink: 0;
+  z-index: 999;
 }
 
 /* Search bar styling */
 .search-bar {
-  flex: 1;
+  flex: 0 1 400px; /* Don't grow, can shrink, base width 400px */
   display: flex;
   align-items: center;
   gap: 12px;
@@ -90,6 +97,7 @@ html::-webkit-scrollbar,
   padding: 10px 16px;
   border-radius: 12px;
   border: 2px solid #e5e7eb;
+  min-width: 200px; /* Minimum width to prevent too much squishing */
 }
 
 .search-bar input {
@@ -123,7 +131,8 @@ html::-webkit-scrollbar,
   background: white;
   cursor: pointer;
   transition: all 0.2s ease;
-  flex-shrink: 0;
+  margin-left: 16px; /* Consistent spacing */
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .notification-bell:hover {
@@ -266,6 +275,7 @@ html::-webkit-scrollbar,
   display: flex;
   align-items: center;
   gap: 16px;
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 /* Close sidebar button */
@@ -319,10 +329,6 @@ html::-webkit-scrollbar,
 
   .mobile-menu-toggle {
     display: flex;
-    position: fixed;
-    top: 16px;
-    left: 16px;
-    z-index: 1000;
   }
 
   .sidebar-container {
@@ -333,13 +339,9 @@ html::-webkit-scrollbar,
     width: 280px;
     margin: 0;
     transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    z-index: 999;
-    border-radius: 0;
-  }
-
-  .sidebar-container.open {
-    transform: translateX(0);
+    z-index: 1002;
+    background: white;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
   }
 
   .mobile-overlay {
@@ -350,7 +352,7 @@ html::-webkit-scrollbar,
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.5);
-    z-index: 998;
+    z-index: 1001;
     backdrop-filter: blur(4px);
   }
 
@@ -361,10 +363,60 @@ html::-webkit-scrollbar,
   .dashboard-container {
     padding: 16px;
     margin-top: 0;
+    height: auto;
+    overflow-y: auto;
+  }
+
+  .health-cards {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .calendar-container {
+    padding: 12px;
+    margin: 12px 0;
+  }
+
+  .calendar-widget {
+    min-height: 250px;
+  }
+
+  .schedule-card {
+    padding: 12px;
+  }
+
+  .top-header {
+    padding: 12px 16px 12px 72px; /* Space for hamburger menu */
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .search-bar {
+    flex: 0 1 320px; /* Reduced base width for tablets */
+  }
+
+  .notification-bell {
+    position: relative;
+    right: 0;
+    margin-left: auto; /* Push to the right */
+  }
+
+  .calendar-widget,
+  .react-calendar__month-view__weekdays,
+  .react-calendar__month-view__days {
+    min-width: 320px; /* Slightly reduced for tablets but still showing all days */
+  }
+
+  .header-actions {
+    margin-left: auto;
   }
 }
 
 @media screen and (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+
   .app-layout {
     padding-top: 50px;
   }
@@ -374,37 +426,633 @@ html::-webkit-scrollbar,
   }
 
   .top-header {
-    flex-wrap: wrap;
-    gap: 12px;
-    padding: 12px;
+    padding: 10px 16px 10px 60px;
   }
 
   .search-bar {
-    order: 2;
-    width: 100%;
+    flex: 0 1 260px; /* Further reduced for mobile */
   }
 
   .header-actions {
     order: 1;
     margin-left: auto;
   }
+
+  .health-card {
+    padding: 16px;
+    min-height: auto;
+  }
+
+  .anatomy-section,
+  .activity-section {
+    padding: 16px;
+    min-height: auto;
+  }
+
+  .mobile-menu-toggle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .mobile-menu-toggle svg,
+  .mobile-menu-toggle img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .calendar-container {
+    padding: 12px;
+    margin: 12px 0;
+  }
+
+  .calendar-widget {
+    min-width: 300px; /* Further reduced but maintaining day visibility */
+  }
+
+  .react-calendar__tile {
+    padding: 6px 2px;
+    font-size: 13px;
+  }
+
+  .schedule-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .schedule-icon img,
+  .schedule-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .sidebar-container.open .mobile-menu-toggle {
+    right: 12px;
+    top: 12px;
+  }
+
+  .notification-bell {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 @media screen and (max-width: 480px) {
   .app-layout {
-    padding-top: 40px;
-  }
-
-  .mobile-menu-toggle {
-    top: 12px;
-    left: 12px;
+    padding-top: 45px;
   }
 
   .dashboard-container {
     padding: 8px;
   }
 
+  .top-header {
+    padding: 8px 12px 8px 52px;
+  }
+
+  .search-bar {
+    flex: 0 1 200px; /* Minimum width for mobile */
+    padding: 8px 12px;
+  }
+
+  .health-card,
+  .anatomy-section,
+  .activity-section {
+    padding: 12px;
+    border-radius: 12px;
+  }
+
   .sidebar-container {
     width: 260px;
   }
+
+  .notification-bell {
+    width: 30px;
+    height: 30px;
+  }
+
+  .health-cards {
+    gap: 8px;
+  }
+
+  .mobile-menu-toggle {
+    width: 32px;
+    height: 32px;
+    top: 12px;
+    left: 12px;
+  }
+
+  .mobile-menu-toggle svg,
+  .mobile-menu-toggle img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .calendar-container {
+    padding: 8px;
+    margin: 8px 0;
+    border-radius: 10px;
+  }
+
+  .calendar-widget {
+    min-width: 280px; /* Minimum width for mobile while keeping all days */
+  }
+
+  .react-calendar__month-view__weekdays,
+  .react-calendar__month-view__days {
+    min-width: 260px;
+    gap: 1px;
+  }
+
+  .react-calendar__tile {
+    padding: 4px 1px;
+    font-size: 12px;
+  }
+
+  .sidebar-container.open .mobile-menu-toggle {
+    right: 10px;
+    top: 10px;
+  }
 }
+
+/* Animated Hamburger Menu */
+.mobile-menu-toggle {
+  display: none;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 1001;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-toggle .container {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.mobile-menu-toggle svg {
+  width: 100%;
+  height: 100%;
+  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-menu-toggle.active svg {
+  transform: rotate(90deg);
+}
+
+.mobile-menu-toggle path {
+  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke-dasharray 500ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke-dashoffset 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  stroke: #3f5ed0 !important; /* Blue stroke color */
+}
+
+.mobile-menu-toggle g {
+  stroke: #3f5ed0 !important; /* Ensure blue color for the entire group */
+}
+
+.mobile-menu-toggle path[fill="#009100"] {
+  fill: transparent; /* Remove the green fill */
+}
+
+.mobile-menu-toggle path:nth-child(1) {
+  transform-origin: 36% 40%;
+}
+
+.mobile-menu-toggle path:nth-child(2) {
+  stroke-dasharray: 29 299;
+}
+
+.mobile-menu-toggle path:nth-child(3) {
+  transform-origin: 35% 63%;
+}
+
+.mobile-menu-toggle path:nth-child(4) {
+  stroke-dasharray: 29 299;
+}
+
+.mobile-menu-toggle path:nth-child(5) {
+  transform-origin: 61% 52%;
+}
+
+.mobile-menu-toggle path:nth-child(6) {
+  transform-origin: 62% 52%;
+}
+
+.mobile-menu-toggle.active path:nth-child(1) {
+  transform: translateX(9px) translateY(1px) rotate(45deg);
+}
+
+.mobile-menu-toggle.active path:nth-child(2) {
+  stroke-dasharray: 225 299;
+  stroke-dashoffset: -72px;
+}
+
+.mobile-menu-toggle.active path:nth-child(3) {
+  transform: translateX(9px) translateY(1px) rotate(-45deg);
+}
+
+.mobile-menu-toggle.active path:nth-child(4) {
+  stroke-dasharray: 225 299;
+  stroke-dashoffset: -72px;
+}
+
+.mobile-menu-toggle.active path:nth-child(5) {
+  transform: translateX(9px) translateY(1px) rotate(-45deg);
+}
+
+.mobile-menu-toggle.active path:nth-child(6) {
+  transform: translateX(9px) translateY(1px) rotate(45deg);
+}
+
+@media screen and (max-width: 992px) {
+  .mobile-menu-toggle {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .mobile-menu-toggle {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .mobile-menu-toggle {
+    width: 32px;
+    height: 32px;
+    top: 12px;
+    left: 12px;
+  }
+}
+
+/* Calendar Container */
+.calendar-container {
+  width: 100%;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 16px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  overflow-x: auto; /* Enable horizontal scroll if needed */
+  -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+  min-width: 0; /* Allow container to shrink */
+}
+
+.calendar-widget {
+  width: 100%;
+  min-width: 340px; /* Increased minimum width to ensure all days are visible */
+}
+
+/* Calendar Navigation */
+.react-calendar__navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5em;
+  padding: 0 8px;
+}
+
+.react-calendar__navigation button {
+  background: none;
+  border: none;
+  padding: 8px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Calendar Header (Days of Week) */
+.react-calendar__month-view__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(40px, 1fr)); /* Ensure minimum column width */
+  gap: 4px;
+  margin-bottom: 8px;
+  min-width: 340px; /* Match calendar widget minimum width */
+}
+
+.react-calendar__month-view__weekdays__weekday {
+  text-align: center;
+  padding: 8px 4px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #4a5568;
+  text-transform: uppercase;
+}
+
+/* Calendar Days Grid */
+.react-calendar__month-view__days {
+  display: grid !important;
+  grid-template-columns: repeat(7, minmax(40px, 1fr)) !important; /* Ensure minimum column width */
+  gap: 4px !important;
+  min-width: 340px; /* Match calendar widget minimum width */
+}
+
+.react-calendar__tile {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  font-size: 14px;
+  background: none;
+  border: none;
+  border-radius: 8px;
+}
+
+/* Mobile Responsive Adjustments */
+@media screen and (max-width: 768px) {
+  .calendar-container {
+    padding: 12px;
+    margin: 12px 0;
+  }
+
+  .calendar-widget {
+    min-width: 300px; /* Further reduced but maintaining day visibility */
+  }
+
+  .react-calendar__navigation button {
+    padding: 6px;
+    font-size: 14px;
+  }
+
+  .react-calendar__month-view__weekdays {
+    min-width: 280px;
+    gap: 2px;
+  }
+
+  .react-calendar__month-view__weekdays__weekday {
+    padding: 6px 2px;
+    font-size: 12px;
+  }
+
+  .react-calendar__month-view__days {
+    min-width: 280px;
+    gap: 2px !important;
+  }
+
+  .react-calendar__tile {
+    padding: 6px 2px;
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .calendar-container {
+    padding: 8px;
+    margin: 8px 0;
+  }
+
+  .calendar-widget {
+    min-width: 260px;
+  }
+
+  .react-calendar__navigation {
+    margin-bottom: 1em;
+  }
+
+  .react-calendar__navigation button {
+    padding: 4px;
+    font-size: 13px;
+  }
+
+  .react-calendar__month-view__weekdays {
+    min-width: 260px;
+    gap: 1px;
+  }
+
+  .react-calendar__month-view__weekdays__weekday {
+    padding: 4px 1px;
+    font-size: 11px;
+    abbr[title] {
+      text-decoration: none;
+    }
+  }
+
+  .react-calendar__month-view__days {
+    min-width: 260px;
+    gap: 1px !important;
+  }
+
+  .react-calendar__tile {
+    padding: 4px 1px;
+    font-size: 12px;
+  }
+}
+
+/* Calendar Tile States */
+.react-calendar__tile--now {
+  background: #e8edfb !important;
+  font-weight: 600;
+}
+
+.react-calendar__tile--active {
+  background: #3f5ed0 !important;
+  color: white !important;
+}
+
+.react-calendar__tile:enabled:hover {
+  background: #f0f4ff !important;
+}
+
+/* Additional mobile optimizations */
+@media screen and (max-width: 360px) {
+  .calendar-container {
+    padding: 6px;
+    margin: 6px 0;
+  }
+
+  .calendar-widget {
+    min-width: 240px;
+  }
+
+  .react-calendar__month-view__weekdays,
+  .react-calendar__month-view__days {
+    min-width: 240px;
+  }
+
+  .react-calendar__tile {
+    padding: 3px 1px;
+    font-size: 11px;
+  }
+}
+
+/* Upcoming Schedule Section */
+.schedule-section {
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+  background: white;
+  border-radius: 12px;
+}
+
+.schedule-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.schedule-card {
+  display: flex;
+  flex-direction: column;
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 16px;
+  gap: 12px;
+  min-width: 0; /* Prevents flex item from overflowing */
+}
+
+.schedule-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.schedule-icon-wrapper {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 10px;
+}
+
+.schedule-content {
+  flex: 1;
+  min-width: 0; /* Prevents text from overflowing */
+}
+
+.schedule-title {
+  font-weight: 600;
+  font-size: 16px;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.schedule-description {
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.schedule-time {
+  color: #6b7280;
+  font-size: 14px;
+  margin-top: auto;
+}
+
+/* Tablet Responsive */
+@media screen and (max-width: 992px) {
+  .schedule-cards-container {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+  }
+
+  .schedule-card {
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .schedule-icon-wrapper {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+  .schedule-section {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .schedule-cards-container {
+    grid-template-columns: 1fr; /* Single column */
+    gap: 10px;
+  }
+
+  .schedule-card {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .schedule-card-header {
+    gap: 10px;
+  }
+
+  .schedule-icon-wrapper {
+    width: 32px;
+    height: 32px;
+  }
+
+  .schedule-title {
+    font-size: 15px;
+  }
+
+  .schedule-description {
+    font-size: 13px;
+    -webkit-line-clamp: 2;
+  }
+
+  .schedule-time {
+    font-size: 13px;
+  }
+}
+
+/* Small Mobile Responsive */
+@media screen and (max-width: 480px) {
+  .schedule-section {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .schedule-cards-container {
+    gap: 8px;
+  }
+
+  .schedule-card {
+    padding: 10px;
+    gap: 6px;
+  }
+
+  .schedule-card-header {
+    gap: 8px;
+  }
+
+  .schedule-icon-wrapper {
+    width: 28px;
+    height: 28px;
+  }
+
+  .schedule-title {
+    font-size: 14px;
+  }
+
+  .schedule-description {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .schedule-time {
+    font-size: 12px;
+  }
+}
+

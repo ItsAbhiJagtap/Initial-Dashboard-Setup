@@ -1,8 +1,22 @@
 import humanAnatomyImg from '../../assets/humanAnatomyImg.jpeg'
+import qrScanImg from '../../assets/qr-scan.png'
 import { ZoomIn } from 'lucide-react'
 import './AnatomySection.css'
 
 const healthIndicators = [
+  {
+    id: 'qr-scan-1',
+    icon: <img 
+      src="/src/assets/qr-scan.png" 
+      alt="QR Scan 1"
+      className="qr-scan-icon"
+      width="20"
+      height="20"
+      loading="eager"
+    />,
+    position: { top: '19%', left: '51%' },
+    status: 'qr-scan-icon-only'
+  },
   {
     id: 'heart',
     icon: '❤️',
@@ -16,6 +30,19 @@ const healthIndicators = [
     label: 'Healthy Knee',
     position: { bottom: '23%', right: '57%' },
     status: 'leg'
+  },
+  {
+    id: 'qr-scan-2',
+    icon: <img 
+      src="/src/assets/qr-scan.png" 
+      alt="QR Scan 2"
+      className="qr-scan-icon"
+      width="20"
+      height="20"
+      loading="eager"
+    />,
+    position: { bottom: '23%', right: '51%' },
+    status: 'qr-scan-icon-only'
   }
 ]
 
@@ -43,7 +70,7 @@ const AnatomySection = () => {
             style={indicator.position}
           >
             <span className="indicator-icon">{indicator.icon}</span>
-            <span className="indicator-label">{indicator.label}</span>
+            {indicator.label && <span className="indicator-label">{indicator.label}</span>}
           </div>
         ))}
       </div>
