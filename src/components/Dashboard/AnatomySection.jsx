@@ -14,7 +14,7 @@ const healthIndicators = [
       height="20"
       loading="eager"
     />,
-    position: { top: '19%', left: '51%' },
+    position: { top: '19%', left: '49%' },
     status: 'qr-scan-icon-only'
   },
   {
@@ -41,7 +41,7 @@ const healthIndicators = [
       height="20"
       loading="eager"
     />,
-    position: { bottom: '23%', right: '51%' },
+    position: { bottom: '23%', right: '49%' },
     status: 'qr-scan-icon-only'
   }
 ]

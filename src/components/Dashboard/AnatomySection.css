@@ -33,19 +33,20 @@
   padding: 6px 12px;
   border-radius: 20px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   z-index: 1;
   color: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(8px);
 }
 
 .health-indicator:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
 }
 
 .health-indicator.heart {
-  background: #7c3aed;
+  background: rgba(124, 58, 237, 0.95);
   top: 19%;
   left: 57%;
 }
@@ -57,7 +58,7 @@
 }
 
 .health-indicator.leg {
-  background: #0ea5e9;
+  background: rgba(14, 165, 233, 0.95);
   bottom: 23%;
   right: 57%;
 }
@@ -66,6 +67,7 @@
   background: transparent;
   padding: 0;
   box-shadow: none;
+  backdrop-filter: none;
 }
 
 .health-indicator.qr-scan-icon-only:hover {
@@ -74,14 +76,16 @@
 }
 
 .health-indicator.qr-scan-icon-only .qr-scan-icon {
-  width: 24px;
-  height: 24px;
-  filter: invert(45%) sepia(27%) saturate(1966%) hue-rotate(217deg) brightness(95%) contrast(95%); /* Light violet color */
-  transition: all 0.2s ease;
+  width: 60px;
+  height: 40px;
+  filter: invert(40%) sepia(45%) saturate(1200%) hue-rotate(230deg) brightness(95%) contrast(95%); /* Enhanced violet color */
+  transition: all 0.3s ease;
+  opacity: 0.9;
 }
 
 .health-indicator.qr-scan-icon-only:hover .qr-scan-icon {
-  filter: invert(35%) sepia(27%) saturate(1966%) hue-rotate(217deg) brightness(95%) contrast(95%); /* Darker violet on hover */
+  filter: invert(35%) sepia(50%) saturate(1400%) hue-rotate(230deg) brightness(90%) contrast(100%); /* Darker and more saturated on hover */
+  opacity: 1;
 }
 
 .indicator-icon {
@@ -145,7 +149,13 @@
   }
 
   .health-indicator {
-    padding: 4px 10px;
+    padding: 5px 10px;
+    border-radius: 16px;
+  }
+
+  .health-indicator.qr-scan-icon-only .qr-scan-icon {
+    width: 50px;
+    height: 35px;
   }
 
   .indicator-icon {
@@ -154,6 +164,7 @@
 
   .indicator-label {
     font-size: 11px;
+    font-weight: 500;
   }
 
   .zoom-icon {
@@ -165,11 +176,6 @@
     width: 16px;
     height: 16px;
   }
-
-  .health-indicator.qr-scan-icon-only .qr-scan-icon {
-    width: 20px;
-    height: 20px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -179,6 +185,11 @@
 
   .human-body-container {
     height: 300px;
+  }
+
+  .health-indicator {
+    padding: 4px 8px;
+    border-radius: 14px;
   }
 
   .health-indicator.heart {
@@ -193,12 +204,21 @@
 
   .health-indicator.qr-scan-icon-only:first-of-type {
     top: 15%;
-    left: 49%;
+    left: 47%;
   }
   
   .health-indicator.qr-scan-icon-only:last-of-type {
     bottom: 20%;
-    right: 49%;
+    right: 47%;
+  }
+
+  .health-indicator.qr-scan-icon-only .qr-scan-icon {
+    width: 40px;
+    height: 30px;
+  }
+
+  .indicator-label {
+    font-size: 10px;
   }
 
   .zoom-icon {
@@ -216,10 +236,5 @@
   .health-indicator.qr-scan {
     top: 42%;
     left: 50%;
-  }
-
-  .health-indicator.qr-scan-icon-only .qr-scan-icon {
-    width: 18px;
-    height: 18px;
   }
 }

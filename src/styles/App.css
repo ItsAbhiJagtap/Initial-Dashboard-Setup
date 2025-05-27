@@ -89,7 +89,7 @@ html::-webkit-scrollbar,
 
 /* Search bar styling */
 .search-bar {
-  flex: 0 1 400px; /* Don't grow, can shrink, base width 400px */
+  flex: 0 1 900px; /* Slightly reduced from 1000px for better balance */
   display: flex;
   align-items: center;
   gap: 12px;
@@ -97,7 +97,8 @@ html::-webkit-scrollbar,
   padding: 10px 16px;
   border-radius: 12px;
   border: 2px solid #e5e7eb;
-  min-width: 200px; /* Minimum width to prevent too much squishing */
+  min-width: 300px; /* Reduced minimum width for better mobile support */
+  transition: all 0.3s ease; /* Smooth transition for width changes */
 }
 
 .search-bar input {
@@ -303,6 +304,10 @@ html::-webkit-scrollbar,
   .app-layout {
     grid-template-columns: 240px 45% auto;
   }
+
+  .search-bar {
+    flex: 0 1 700px; /* Adjusted for large screens */
+  }
 }
 
 @media screen and (max-width: 1200px) {
@@ -386,13 +391,14 @@ html::-webkit-scrollbar,
   }
 
   .top-header {
-    padding: 12px 16px 12px 72px; /* Space for hamburger menu */
+    padding: 12px 16px 12px 72px;
     background: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   }
 
   .search-bar {
-    flex: 0 1 320px; /* Reduced base width for tablets */
+    flex: 0 1 600px; /* Adjusted for tablets */
+    min-width: 280px;
   }
 
   .notification-bell {
@@ -426,11 +432,18 @@ html::-webkit-scrollbar,
   }
 
   .top-header {
+    flex-wrap: nowrap; /* Prevent wrapping */
     padding: 10px 16px 10px 60px;
   }
 
   .search-bar {
-    flex: 0 1 260px; /* Further reduced for mobile */
+    flex: 0 1 100%; /* Full width on mobile */
+    min-width: 0; /* Allow shrinking on mobile */
+    margin: 0 8px; /* Add some margin */
+  }
+
+  .search-bar input {
+    font-size: 13px; /* Slightly smaller font on mobile */
   }
 
   .header-actions {
@@ -510,8 +523,16 @@ html::-webkit-scrollbar,
   }
 
   .search-bar {
-    flex: 0 1 200px; /* Minimum width for mobile */
     padding: 8px 12px;
+  }
+
+  .search-bar input {
+    font-size: 12px;
+  }
+
+  .search-icon {
+    width: 16px;
+    height: 16px;
   }
 
   .health-card,
