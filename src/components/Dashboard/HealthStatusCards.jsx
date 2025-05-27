@@ -40,7 +40,10 @@ const HealthCard = ({ card }) => {
         src={card.icon} 
         alt={card.title} 
         className="card-image" 
-        loading="eager"
+        loading="lazy"
+        width="32"
+        height="32"
+        decoding="async"
         draggable="false"
       />
       <div className="card-content">

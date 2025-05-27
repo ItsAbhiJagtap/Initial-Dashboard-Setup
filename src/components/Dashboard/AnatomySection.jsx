@@ -30,6 +30,11 @@ const AnatomySection = () => {
           src={humanAnatomyImg}
           alt="Human anatomy" 
           className="human-body-image"
+          loading="eager"
+          fetchpriority="high"
+          width="400"
+          height="430"
+          decoding="async"
         />
         {healthIndicators.map((indicator) => (
           <div
