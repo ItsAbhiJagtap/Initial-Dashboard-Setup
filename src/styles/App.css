@@ -5,12 +5,23 @@ body, html, #root {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
   font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   background: white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar,
+html::-webkit-scrollbar,
+#root::-webkit-scrollbar,
+.sidebar-container::-webkit-scrollbar,
+.dashboard-container::-webkit-scrollbar,
+.right-sidebar::-webkit-scrollbar {
+  display: none;
 }
 
 /* Main 3-column layout */
@@ -18,31 +29,36 @@ body, html, #root {
   display: grid;
   grid-template-columns: 240px 40% auto;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background: white;
-  overflow: hidden;
-  padding: 0;
-  gap: 0;
   box-sizing: border-box;
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* Sidebar styling */
+/* Sidebar container */
 .sidebar-container {
   background: #f8f9fa;
   height: 100vh;
-  overflow: hidden;
+  overflow-y: auto;
   border-radius: 24px;
   margin: 16px 0 16px 16px;
+  position: sticky;
+  top: 16px;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 }
 
 /* Main dashboard area */
 .dashboard-container {
-  height: 100vh;
   padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  overflow: hidden;
+  overflow-y: auto;
+  max-height: 100vh;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 }
 
 .dashboard-content {
@@ -50,8 +66,6 @@ body, html, #root {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  min-height: 0;
-  overflow: hidden;
 }
 
 /* Search and notification header */
@@ -162,13 +176,17 @@ body, html, #root {
   height: auto;
 }
 
-/* Right Section */
+/* Right sidebar */
 .right-sidebar {
   background: #f8fafc;
   border-radius: 24px;
+  margin: 16px 16px 16px 0;
+  position: sticky;
+  top: 16px;
   height: calc(100vh - 32px);
-  display: flex;
-  flex-direction: column;
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 }
 
 .right-sidebar-header {
@@ -227,43 +245,11 @@ body, html, #root {
   gap: 20px;
 }
 
-/* Mobile menu toggle */
-.mobile-menu-toggle {
-  display: none;
-  position: fixed;
-  top: 16px;
-  left: 16px;
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: white;
-  border: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  padding: 0;
-  align-items: center;
-  justify-content: center;
-  color: #1e293b;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.mobile-menu-toggle:hover {
-  background: #f8fafc;
-  transform: translateY(-1px);
-}
-
+/* Mobile menu toggle and overlay */
+.mobile-menu-toggle,
+.mobile-sidebar-toggle,
 .mobile-overlay {
   display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 100;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
 }
 
 /* Utility classes for responsive visibility */
@@ -280,14 +266,6 @@ body, html, #root {
   display: flex;
   align-items: center;
   gap: 16px;
-}
-
-.mobile-sidebar-toggle {
-  display: none;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
 }
 
 /* Close sidebar button */
@@ -323,47 +301,41 @@ body, html, #root {
   }
 
   .right-sidebar {
-    position: fixed;
-    right: 0;
-    top: 0;
-    width: 360px;
-    height: 100vh;
-    transform: translateX(100%);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 200;
-    background: white;
-    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
+    display: none;
   }
 
-  .right-sidebar.open {
-    transform: translateX(0);
-  }
-
-  .close-sidebar {
-    display: flex;
+  .dashboard-container {
+    padding: 16px;
+    max-height: none;
+    overflow-y: visible;
   }
 }
 
 @media screen and (max-width: 992px) {
-  .mobile-menu-toggle {
-    display: flex;
-  }
-
   .app-layout {
     grid-template-columns: 1fr;
-    padding-top: 80px;
+    padding-top: 60px;
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    z-index: 1000;
   }
 
   .sidebar-container {
     position: fixed;
     left: 0;
     top: 0;
-    height: 100vh;
+    height: 100%;
+    width: 280px;
+    margin: 0;
     transform: translateX(-100%);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 200;
-    background: white;
-    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    z-index: 999;
+    border-radius: 0;
   }
 
   .sidebar-container.open {
@@ -371,34 +343,40 @@ body, html, #root {
   }
 
   .mobile-overlay {
-    display: block;
-  }
-
-  .mobile-only {
-    display: block;
-  }
-
-  .desktop-only {
     display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    backdrop-filter: blur(4px);
   }
 
-  .mobile-sidebar-toggle {
+  .mobile-overlay.visible {
     display: block;
   }
 
-  .dashboard-grid {
-    grid-template-columns: 1fr;
+  .dashboard-container {
+    padding: 16px;
+    margin-top: 0;
   }
 }
 
 @media screen and (max-width: 768px) {
-  .right-sidebar {
-    width: 100%;
+  .app-layout {
+    padding-top: 50px;
+  }
+
+  .dashboard-container {
+    padding: 12px;
   }
 
   .top-header {
     flex-wrap: wrap;
     gap: 12px;
+    padding: 12px;
   }
 
   .search-bar {
@@ -413,34 +391,20 @@ body, html, #root {
 }
 
 @media screen and (max-width: 480px) {
+  .app-layout {
+    padding-top: 40px;
+  }
+
   .mobile-menu-toggle {
     top: 12px;
     left: 12px;
-    width: 36px;
-    height: 36px;
-  }
-
-  .close-sidebar {
-    top: 12px;
-    right: 12px;
-    width: 36px;
-    height: 36px;
-  }
-
-  .app-layout {
-    padding-top: 60px;
   }
 
   .dashboard-container {
-    padding: 12px;
+    padding: 8px;
   }
 
-  .search-bar {
-    padding: 8px 12px;
-  }
-
-  .notification-bell {
-    width: 36px;
-    height: 36px;
+  .sidebar-container {
+    width: 260px;
   }
 }

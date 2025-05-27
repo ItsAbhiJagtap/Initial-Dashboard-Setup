@@ -12,8 +12,20 @@ export function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false)
 
-  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen)
-  const toggleRightSidebar = () => setIsRightSidebarOpen(!isRightSidebarOpen)
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen)
+    if (isRightSidebarOpen) setIsRightSidebarOpen(false)
+  }
+
+  const toggleRightSidebar = () => {
+    setIsRightSidebarOpen(!isRightSidebarOpen)
+    if (isSidebarOpen) setIsSidebarOpen(false)
+  }
+
+  const closeOverlay = () => {
+    setIsSidebarOpen(false)
+    setIsRightSidebarOpen(false)
+  }
 
   return (
     <div className="app-layout">
@@ -28,7 +40,7 @@ export function App() {
 
       {/* Left side - Navigation and branding */}
       <aside className={`sidebar-container ${isSidebarOpen ? 'open' : ''}`}>
-        <Sidebar onClose={() => setIsSidebarOpen(false)} />
+        <Sidebar onClose={closeOverlay} />
       </aside>
 
       {/* Main area - Dashboard content */}
@@ -51,9 +63,7 @@ export function App() {
             </button>
           </div>
         </div>
-        <div className="dashboard-content">
-          <DashboardMainContent />
-        </div>
+        <DashboardMainContent />
       </main>
 
       {/* Right side - Calendar and upcoming stuff */}
@@ -61,14 +71,14 @@ export function App() {
         <div className="right-sidebar-header">
           <button 
             className="close-sidebar"
-            onClick={() => setIsRightSidebarOpen(false)}
+            onClick={closeOverlay}
             aria-label="Close calendar"
           >
             <X size={24} />
           </button>
           <div className="user-actions">
             <button className="add-button">+</button>
-            <img src={avatar} alt="User" className="user-avatar desktop-only" />
+            <img src={avatar} alt="User" className="user-avatar" />
           </div>
         </div>
         <div className="right-sidebar-content">
@@ -80,11 +90,8 @@ export function App() {
       {/* Overlay for mobile */}
       {(isSidebarOpen || isRightSidebarOpen) && (
         <div 
-          className="mobile-overlay"
-          onClick={() => {
-            setIsSidebarOpen(false)
-            setIsRightSidebarOpen(false)
-          }}
+          className={`mobile-overlay ${isSidebarOpen || isRightSidebarOpen ? 'visible' : ''}`}
+          onClick={closeOverlay}
         />
       )}
     </div>
