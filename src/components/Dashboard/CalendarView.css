@@ -1,0 +1,518 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap');
+
+.calendar-section {
+  background: transparent;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.calendar-header h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.calendar-nav {
+  display: flex;
+  gap: 12px;
+}
+
+.nav-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  position: relative;
+}
+
+.nav-button:hover {
+  background: #f1f5f9;
+  color: #7c3aed;
+  transform: translateY(-1px);
+}
+
+.nav-button::before {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+}
+
+.nav-button:first-child::before {
+  transform: translateX(2px);
+}
+
+.nav-button:last-child::before {
+  transform: translateX(-2px);
+}
+
+.nav-button svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2px;
+  position: relative;
+  z-index: 1;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+  background: #f8fafc;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.calendar-day-header {
+  display: none;
+}
+
+.calendar-day {
+  background: transparent;
+  padding: 12px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  position: relative;
+}
+
+.calendar-day.today {
+  background: rgba(14, 165, 233, 0.1);
+  border-radius: 12px;
+}
+
+.calendar-day.today::after {
+  content: 'Today';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #0ea5e9;
+  background: white;
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.calendar-day.darker {
+  background: #f1f5f9;
+  border-radius: 8px;
+}
+
+.day-number {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.day-number.has-appointment::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  width: 4px;
+  height: 4px;
+  background: #7c3aed;
+  border-radius: 50%;
+}
+
+.day-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  font-family: 'Roboto', sans-serif;
+}
+
+.date {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111827;
+  font-family: 'Roboto', sans-serif;
+}
+
+.time-slots {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.time-slot {
+  font-size: 14px;
+  color: #64748b;
+  padding: 4px 8px 12px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  border-radius: 6px;
+  min-width: 72px;
+  max-width: 85px;
+  width: fit-content;
+  position: relative;
+}
+
+.time-slot.highlighted {
+  background: #270d8d;
+  color: white;
+  font-weight: 600;
+  padding: 4px 12px 12px;
+  margin: 0;
+  box-shadow: 0 2px 4px rgba(39, 13, 141, 0.1);
+}
+
+/* Weekend slots specific styling */
+.calendar-day.weekend .time-slot.highlighted {
+  min-width: 72px;
+  max-width: 85px;
+  width: fit-content;
+  box-shadow: none;
+}
+
+.calendar-day.weekend .time-slot.span-2 {
+  height: calc(100% - 12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.calendar-day.weekend .time-slot.span-2.highlighted {
+  background: #270d8d;
+  color: white;
+  font-weight: 600;
+}
+
+.time-slot.with-dot::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: #7c3aed;
+  border-radius: 50%;
+}
+
+.time-slot.highlighted.with-dot::after {
+  background: white;
+}
+
+.time-slot.empty {
+  color: #94a3b8;
+  opacity: 0.7;
+}
+
+/* Ensure consistent styling for weekend slots */
+.calendar-day:nth-last-child(-n+2) .time-slot {
+  width: 100%;
+  margin: 0;
+}
+
+.calendar-day:nth-last-child(-n+2) .time-slot.highlighted {
+  background: #270d8d;
+  padding: 4px 12px 12px;
+  margin: 0;
+  box-shadow: none;
+}
+
+.appointment-cards {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  padding-top: 24px;
+  background: transparent;
+}
+
+.appointment-card {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border-radius: 20px;
+  transition: all 0.2s ease;
+  position: relative;
+  min-height: 140px;
+}
+
+.appointment-card.dentist {
+  background: #270d8d;
+  flex: 0.3;
+}
+
+.appointment-card.physio,
+.appointment-card.physiotherapy,
+.appointment-card.health-checkup,
+.appointment-card.ophthalmologist,
+.appointment-card.cardiologist,
+.appointment-card.neurologist {
+  background: #E2E2EE;
+  flex: 0.7;
+}
+
+.appointment-icon {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  background: rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+.appointment-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.appointment-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 1;
+}
+
+/* Dentist card text styles */
+.appointment-card.dentist .appointment-details h3 {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.appointment-card.dentist .appointment-time {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.appointment-card.dentist .doctor-name {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+}
+
+/* Physio card text styles */
+.appointment-card.physio .appointment-details h3 {
+  color: #1e293b;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.appointment-card.physio .appointment-time {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.appointment-card.physio .doctor-name {
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 14px;
+}
+
+.appointment-details h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.appointment-time {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.doctor-name {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1200px) {
+  .calendar-grid {
+    padding: 16px;
+    gap: 8px;
+  }
+
+  .calendar-day {
+    min-height: 110px;
+    padding: 10px;
+  }
+
+  .calendar-header h2 {
+    font-size: 24px;
+  }
+
+  .day-name {
+    font-size: 17px;
+  }
+
+  .date {
+    font-size: 20px;
+  }
+
+  .appointment-details h3 {
+    font-size: 18px;
+  }
+
+  .appointment-time {
+    font-size: 15px;
+  }
+
+  .doctor-name {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .calendar-section {
+    padding: 16px;
+  }
+
+  .calendar-grid {
+    padding: 12px;
+  }
+
+  .calendar-header h2 {
+    font-size: 22px;
+  }
+
+  .day-name {
+    font-size: 16px;
+  }
+
+  .date {
+    font-size: 18px;
+  }
+
+  .calendar-day {
+    padding: 8px;
+    min-height: 100px;
+  }
+
+  .time-slot {
+    font-size: 12px;
+    padding: 4px 6px;
+  }
+
+  .appointment-cards {
+    flex-direction: column;
+  }
+
+  .appointment-card {
+    flex: none;
+    min-height: 120px;
+  }
+
+  .appointment-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 20px;
+  }
+
+  .appointment-details h3 {
+    font-size: 16px;
+  }
+
+  .appointment-time {
+    font-size: 14px;
+  }
+
+  .doctor-name {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .calendar-section {
+    padding: 12px;
+  }
+
+  .calendar-grid {
+    padding: 10px;
+    gap: 6px;
+  }
+
+  .calendar-header h2 {
+    font-size: 20px;
+  }
+
+  .nav-button {
+    width: 28px;
+    height: 28px;
+  }
+
+  .day-name {
+    font-size: 15px;
+  }
+
+  .date {
+    font-size: 17px;
+  }
+
+  .calendar-day {
+    min-height: 90px;
+    padding: 8px;
+  }
+
+  .time-slot {
+    font-size: 11px;
+    padding: 4px;
+  }
+
+  .appointment-card {
+    padding: 12px;
+  }
+
+  .appointment-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+  }
+
+  .appointment-details h3 {
+    font-size: 15px;
+  }
+
+  .appointment-details p {
+    font-size: 12px;
+  }
+
+  .appointment-time,
+  .doctor-name {
+    font-size: 13px;
+  }
+} 

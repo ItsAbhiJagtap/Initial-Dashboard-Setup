@@ -1,0 +1,155 @@
+.anatomy-section {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 20px;
+  height: 100%;
+  min-height: 430px;
+}
+
+.human-body-container {
+  position: relative;
+  width: 100%;
+  height: 430px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f1f5f9;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.human-body-image {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  max-width: 100%;
+  mix-blend-mode: multiply;
+}
+
+.health-indicator {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 1;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.health-indicator:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.health-indicator.heart {
+  background: #7c3aed;
+  top: 19%;
+  left: 57%;
+}
+
+.health-indicator.leg {
+  background: #0ea5e9;
+  bottom: 23%;
+  right: 57%;
+}
+
+.indicator-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.indicator-label {
+  margin-left: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.zoom-icon {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: white;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+  color: #1e293b;
+  transition: all 0.2s ease;
+}
+
+.zoom-icon:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .anatomy-section {
+    padding: 16px;
+  }
+
+  .human-body-container {
+    height: 380px;
+  }
+}
+
+@media (max-width: 768px) {
+  .human-body-container {
+    height: 340px;
+  }
+
+  .health-indicator {
+    padding: 4px 10px;
+  }
+
+  .indicator-icon {
+    font-size: 14px;
+  }
+
+  .indicator-label {
+    font-size: 11px;
+  }
+
+  .zoom-icon {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .anatomy-section {
+    padding: 12px;
+  }
+
+  .human-body-container {
+    height: 300px;
+  }
+
+  .health-indicator.heart {
+    top: 15%;
+    left: 55%;
+  }
+
+  .health-indicator.leg {
+    bottom: 20%;
+    right: 55%;
+  }
+
+  .zoom-icon {
+    width: 28px;
+    height: 28px;
+    top: 12px;
+    right: 12px;
+  }
+}

@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap');
+
+.upcoming-schedule {
+  padding: 28px;
+}
+
+.upcoming-schedule h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 24px 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.schedule-group {
+  margin-bottom: 24px;
+}
+
+.schedule-group:last-child {
+  margin-bottom: 0;
+}
+
+.schedule-group h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #64748b;
+  margin: 0 0 16px 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.appointments-list {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.appointment-row {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.simple-appointment-card {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border-radius: 20px;
+  background: #c7d6f5;
+  position: relative;
+  flex: 1;
+  min-height: 120px;
+}
+
+/* Specific width cards */
+.simple-appointment-card.partial-width {
+  flex: 0 0 calc(35% - 12px);
+}
+
+.card-icon {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.appointment-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.appointment-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.appointment-time {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: 500;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Appointment type styles */
+.simple-appointment-card.health-checkup,
+.simple-appointment-card.physiotherapy,
+.simple-appointment-card.ophthalmologist,
+.simple-appointment-card.cardiologist,
+.simple-appointment-card.neurologist {
+  background: #E2E2EE;
+}
+
+.simple-appointment-card.test {
+  border-left: 4px solid #3b82f6;
+}
+
+.simple-appointment-card.dental {
+  border-left: 4px solid #ec4899;
+}
+
+.simple-appointment-card.eye {
+  border-left: 4px solid #8b5cf6;
+}
+
+.simple-appointment-card.therapy {
+  border-left: 4px solid #f59e0b;
+}
+
+@media screen and (max-width: 768px) {
+  .upcoming-schedule {
+    padding: 24px;
+  }
+
+  .upcoming-schedule h2 {
+    font-size: 24px;
+  }
+
+  .schedule-group h3 {
+    font-size: 18px;
+  }
+
+  .simple-appointment-card {
+    padding: 12px;
+  }
+
+  .appointment-title {
+    font-size: 18px;
+  }
+
+  .appointment-time {
+    font-size: 15px;
+  }
+
+  .simple-appointment-card.partial-width {
+    flex: 1;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .upcoming-schedule {
+    padding: 20px;
+  }
+
+  .upcoming-schedule h2 {
+    font-size: 22px;
+  }
+
+  .schedule-group h3 {
+    font-size: 16px;
+  }
+
+  .appointment-time {
+    font-size: 14px;
+    min-width: 70px;
+  }
+
+  .appointment-title {
+    font-size: 16px;
+  }
+}
+
+.health-indicator.leg {
+  background: #73e1bd;
+  bottom: 23%;
+  right: 57%;
+} 

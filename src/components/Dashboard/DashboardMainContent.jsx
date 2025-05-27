@@ -1,36 +1,32 @@
-import React from "react";
-import AnatomySection from "./AnatomySection";
-import HealthStatusCards from "./HealthStatusCards";
-import CalendarView from "./CalendarView";
-import ActivityFeed from "./ActivityFeed";
-import UpcomingSchedule from "./UpcomingSchedule";
-import "./DashboardMainContent.css";
+import './DashboardMainContent.css'
+import AnatomySection from './AnatomySection'
+import HealthStatusCards from './HealthStatusCards'
+import ActivityFeed from './ActivityFeed'
 
 const DashboardMainContent = () => {
   return (
-    <div className="dashboard-main">
-      {/* TOP ROW */}
-      <div className="top-row">
-        <div className="left-panel">
+    <div className="dashboard-content">
+      <div className="dashboard-header">
+      <h1 className="dashboard-title">Dashboard</h1>
+        <div className="time-filter">
+          <span className="time-label">This Week</span>
+          <span className="arrow">▼</span>
+        </div>
+      </div>
+      
+      <div className="dashboard-grid">
+        <div className="anatomy-container">
           <AnatomySection />
+        </div>
+
+        <div className="status-cards">
           <HealthStatusCards />
         </div>
-        <div className="right-panel">
-          <CalendarView />
-        </div>
       </div>
 
-      {/* BOTTOM ROW */}
-      <div className="bottom-row">
-        <div className="left-panel">
-          <ActivityFeed />
-        </div>
-        <div className="right-panel">
-          <UpcomingSchedule />
-        </div>
-      </div>
+        <ActivityFeed />
     </div>
-  );
-};
+  )
+}
 
-export default DashboardMainContent;
+export default DashboardMainContent 

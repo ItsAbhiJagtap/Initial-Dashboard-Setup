@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap');
+
+.activity-feed {
+  background: #f8f9fa;
+  border-radius: 20px;
+  padding: 24px;
+  width: 100%;
+  margin-bottom: 0;
+  height: 350px;
+}
+
+.activity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  background: transparent;
+}
+
+.activity-title {
+  font-size: 30px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+  line-height: 1.8;
+  font-family: 'Roboto', sans-serif;
+}
+
+.appointments-badge {
+  font-size: 18px;
+  color: #111827;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 500;
+  background: transparent;
+  font-family: 'Roboto', sans-serif;
+}
+
+.activity-subtitle {
+  font-size: 18px;
+  color: #111827;
+  margin: 4px 0 0 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.activity-chart {
+  width: 100%;
+  height: 220px;
+}
+
+.chart-container {
+  width: 100%;
+  height: 100%;
+}
+
+.chart-bars {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 100%;
+  width: 100%;
+  padding: 0 10px;
+  position: relative;
+}
+
+.bar-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  height: 100%;
+  padding: 0 10px;
+  position: relative;
+}
+
+.bar-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.bar {
+  width: 100%;
+  max-width: 30px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  position: absolute;
+  bottom: 0;
+  background: #e2e8f0;
+}
+
+.bar:hover {
+  opacity: 0.9;
+  transform: scaleY(1.02);
+}
+
+.appointment-indicator {
+  position: absolute;
+  top: -8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #7c3aed;
+  box-shadow: 0 0 0 2px white;
+  z-index: 2;
+}
+
+.day-label {
+  font-size: 16px;
+  color: #111827;
+  font-weight: 500;
+  position: absolute;
+  bottom: -24px;
+  white-space: nowrap;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Responsive Styles */
+@media screen and (min-width: 1440px) {
+  .activity-feed {
+    height: 400px;
+  }
+
+  .activity-chart {
+    height: 280px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .activity-feed {
+    padding: 20px;
+    height: 320px;
+  }
+
+  .activity-chart {
+    height: 200px;
+  }
+
+  .activity-title {
+    font-size: 28px;
+  }
+
+  .appointments-badge {
+    font-size: 17px;
+  }
+
+  .activity-subtitle {
+    font-size: 17px;
+  }
+
+  .day-label {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .activity-feed {
+    padding: 16px;
+    height: 300px;
+  }
+
+  .activity-header {
+    margin-bottom: 16px;
+  }
+
+  .activity-title {
+    font-size: 26px;
+  }
+
+  .appointments-badge {
+    font-size: 16px;
+    padding: 6px 12px;
+  }
+
+  .activity-subtitle {
+    font-size: 16px;
+  }
+
+  .activity-chart {
+    height: 180px;
+  }
+
+  .day-label {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .activity-feed {
+    padding: 12px;
+    height: 280px;
+  }
+
+  .activity-header {
+    margin-bottom: 12px;
+  }
+
+  .activity-title {
+    font-size: 24px;
+  }
+
+  .appointments-badge {
+    font-size: 15px;
+  }
+
+  .activity-subtitle {
+    font-size: 15px;
+  }
+
+  .activity-chart {
+    height: 160px;
+  }
+
+  .day-label {
+    font-size: 13px;
+  }
+} 

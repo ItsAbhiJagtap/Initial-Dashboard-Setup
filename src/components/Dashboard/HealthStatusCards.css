@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap');
+
+.health-status-cards {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  flex: 1;
+}
+
+.health-card {
+  background: transparent;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.health-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-image {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-title {
+  font-size: 21px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+  line-height: 1.4;
+  font-family: 'Roboto', sans-serif;
+}
+
+.card-date {
+  font-size: 14px;
+  font-weight: 500;
+  color: #64748b;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: 'Roboto', sans-serif;
+}
+
+.progress-bar {
+  height: 10px;
+  background: #f1f5f9;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 8px 0 0 0;
+  width: 100%;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.3s ease;
+}
+
+/* Status-specific colors */
+.health-card.lungs .progress-fill {
+  background: #8B4513;
+}
+
+.health-card.teeth .progress-fill {
+  background: #10b981;
+}
+
+.health-card.bone .progress-fill {
+  background: #f97316;
+}
+
+/* Status-specific backgrounds */
+.health-card.lungs .card-image {
+  background: rgba(139, 69, 19, 0.1);
+}
+
+.health-card.teeth .card-image {
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.health-card.bone .card-image {
+  background: rgba(249, 115, 22, 0.1);
+}
+
+.details-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 24px;
+  color: #560a99;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  background: transparent;
+}
+
+.details-row:hover {
+  background: #f8fafc;
+}
+
+.details-text, .details-arrow {
+  color: #560a99;
+} 

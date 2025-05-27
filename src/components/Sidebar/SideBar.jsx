@@ -1,56 +1,74 @@
-import React from "react";
 import {
-  Home,
+  LayoutDashboard,
   History,
-  CalendarDays,
-  Stethoscope,
+  Calendar,
+  ClipboardList,
   BarChart2,
-  FlaskConical,
   MessageCircle,
   LifeBuoy,
   Settings
 } from "lucide-react";
 
+import navLinks from "../../data/navLinks";
 import "./Sidebar.css";
 
-const topNavItems = [
-  { icon: <Home size={18} />, label: "Dashboard" },
-  { icon: <History size={18} />, label: "History" },
-  { icon: <CalendarDays size={18} />, label: "Calendar" },
-  { icon: <Stethoscope size={18} />, label: "Appointments" },
-  { icon: <BarChart2 size={18} />, label: "Statistics" },
-  { icon: <FlaskConical size={18} />, label: "Tests" },
-  { icon: <MessageCircle size={18} />, label: "Chat" },
-  { icon: <LifeBuoy size={18} />, label: "Support" },
-];
+// Map icon strings to Lucide components
+const iconMap = {
+  "layout-dashboard": LayoutDashboard,
+  "History": History,
+  "calender": Calendar,
+  "clipboard-list": ClipboardList,
+  "bar-chart-2": BarChart2,
+  "message-circle": MessageCircle,
+  "support": LifeBuoy,
+  "setting": Settings
+};
+
+const getIcon = (iconName) => {
+  const IconComponent = iconMap[iconName];
+  return IconComponent ? <IconComponent size={18} /> : null;
+};
 
 const Sidebar = () => {
   return (
     <aside className="sidebar">
       <h1 className="sidebar-logo">
-        <span className="logo-primary">Health</span>
-        <span className="logo-accent">care.</span>
+        <span className="logo-blue">Health</span>
+        <span className="logo-black">care.</span>
       </h1>
 
-      <p className="sidebar-section">General</p>
+      <div className="nav-section">
+        <p className="sidebar-section">General</p>
+        <nav className="nav-items">
+          {navLinks.general.map((item) => (
+            <div className="nav-item" key={item.labels}>
+              <span className="nav-icon">{getIcon(item.icon)}</span>
+              <span className="nav-label">{item.labels}</span>
+            </div>
+          ))}
+        </nav>
+      </div>
 
-      <nav className="nav-top">
-        {topNavItems.map((item) => (
-          <div className="nav-item" key={item.label}>
-            <span className="nav-icon">{item.icon}</span>
-            <span className="nav-label">{item.label}</span>
-          </div>
-        ))}
-      </nav>
+      <div className="nav-section">
+        <p className="sidebar-section">Tools</p>
+        <nav className="nav-items">
+          {navLinks.tools.map((item) => (
+            <div className="nav-item" key={item.labels}>
+              <span className="nav-icon">{getIcon(item.icon)}</span>
+              <span className="nav-label">{item.labels}</span>
+            </div>
+          ))}
+        </nav>
+      </div>
 
-      <div className="nav-bottom">
+      <div className="nav-section settings-section">
         <div className="nav-item">
-          <span className="nav-icon"><Settings size={18} /></span>
-          <span className="nav-label">Setting</span>
+          <span className="nav-icon">{getIcon(navLinks.settings.icon)}</span>
+          <span className="nav-label">{navLinks.settings.labels}</span>
         </div>
       </div>
     </aside>
   );
 };
 
-export default Sidebar;
+export default Sidebar; 
