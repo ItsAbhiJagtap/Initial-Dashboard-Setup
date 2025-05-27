@@ -1,5 +1,5 @@
 import { Search } from 'lucide-react'
-import Sidebar from './components/Sidebar/Sidebar'
+import Sidebar from './components/Sidebar/SideBar'
 import DashboardMainContent from './components/Dashboard/DashboardMainContent'
 import CalendarView from './components/Dashboard/CalendarView'
 import UpcomingSchedule from './components/Dashboard/UpcomingSchedule'
