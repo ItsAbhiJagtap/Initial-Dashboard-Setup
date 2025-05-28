@@ -1,5 +1,5 @@
 import humanAnatomyImg from '../../assets/humanAnatomyImg.jpeg'
-import qrScanImg from '../../assets/qr-scan.png'
+import qrScanImg from '../../assets/qrScan.png'
 import { ZoomIn } from 'lucide-react'
 import './AnatomySection.css'
 
@@ -7,7 +7,7 @@ const healthIndicators = [
   {
     id: 'qr-scan-1',
     icon: <img 
-      src="/src/assets/qr-scan.png" 
+      src={qrScanImg}
       alt="QR Scan 1"
       className="qr-scan-icon"
       width="20"
@@ -34,7 +34,7 @@ const healthIndicators = [
   {
     id: 'qr-scan-2',
     icon: <img 
-      src="/src/assets/qr-scan.png" 
+      src={qrScanImg}
       alt="QR Scan 2"
       className="qr-scan-icon"
       width="20"
