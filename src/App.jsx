@@ -43,7 +43,7 @@ export function App() {
         <Sidebar onClose={closeOverlay} />
       </aside>
 
-      {/* Main area - Dashboard content */}
+      {/* Main area - Dashboard content. */}
       <main className="dashboard-container">
         <div className="top-header">
           <div className="search-bar">
